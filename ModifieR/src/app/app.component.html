@@ -1,2 +1,44 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar>ModifieR Web</mat-toolbar>
+<mat-toolbar color="primary" class="main-toolbar">
+    <mat-icon class="toolbar-icon">bubble_chart</mat-icon>
+    <span class="title">ModifieR</span>
+    <span class="example-spacer"></span>
+    <button mat-button>About ModifieR</button>
+    <button mat-button>Use prefilled example</button>
+    <!-- <mat-icon class="example-icon">favorite</mat-icon>
+    <mat-icon class="example-icon">delete</mat-icon> -->
+</mat-toolbar>
+<div class="background">
+<mat-card class="content-card">
+        <mat-horizontal-stepper [linear]="isLinear">
+          <mat-step [stepControl]="firstFormGroup">
+                <ng-template  matStepLabel>Upload genes</ng-template>
+                <mat-card  class="selector-content-card">
+                    <mat-card-title>Upload a file with genes</mat-card-title>
+                <button mat-raised-button>Select a File</button>
+                </mat-card>
+          </mat-step>
+           <mat-step [stepControl]="secondFormGroup">
+              <ng-template matStepLabel>Choose algorithms</ng-template>
+              <mat-card class="selector-content-card">
+                    <mat-card-title>Choose the algorithms to use for disease module inference</mat-card-title>
+              <div class="checkbox-div-top">
+                    <mat-checkbox class="checkbox">DIAMOnD</mat-checkbox>
+                    <mat-checkbox class="checkbox-right">MCODE</mat-checkbox>
+                </div>
+                <div class="checkbox-div">
+                    <mat-checkbox class="checkbox">Module Discoverer</mat-checkbox>
+                    <mat-checkbox class="checkbox-right">Barrenäs</mat-checkbox>
+                </div>
+              </mat-card>
+          </mat-step>
+           <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+          </mat-step> 
+        </mat-horizontal-stepper>
+        
+       
+
+</mat-card>
+</div>
