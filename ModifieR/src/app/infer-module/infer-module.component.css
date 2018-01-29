@@ -1,0 +1,24 @@
+.label{
+    margin-top: 30px;
+    padding-top: 30px;
+}
+.checkbox-div{
+    width: 300px;
+}
+.checkbox-div-top{
+  width: 296px;
+}
+.card-title{
+    padding-bottom: 20px;
+}
+.checkbox{
+    font-size: 14px;
+    float: left;
+}
+.checkbox-right{
+    float: right;
+    font-size: 14px;
+}
+.selector-content-card{
+    height: 300px;
+}

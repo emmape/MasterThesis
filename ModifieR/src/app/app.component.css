@@ -22,40 +22,21 @@
     /* width: 800px; */
     width: 70vw;
     /* height: 78vh; */
-    height: 200vh;
+    height: 78vh;
     margin-left: auto;
     margin-right: auto;
     /* margin-top: 10px; */
+    overflow-y: scroll;
   }
-  .label{
-      margin-top: 30px;
-      padding-top: 30px;
-  }
-  .checkbox-div{
-      width: 300px;
-  }
-  .checkbox-div-top{
-    width: 296px;
-  }
-  .card-title{
-      padding-bottom: 20px;
-  }
-  .checkbox{
-      font-size: 14px;
-      float: left;
-  }
-  .checkbox-right{
-      float: right;
-      font-size: 14px;
-  }
+ 
   .background{
     background-image: url("../gray.jpg");
+    height: 86.46vh;
+    width: 99vw;
         /* background-color: rgba(190, 255, 226, 0.17); */
       /* background-blend-mode: lighten; */
 
   }
-  .selector-content-card{
-      height: 300px;
-  }
+
  
  
