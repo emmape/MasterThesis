@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FileUploaderComponent } from '../components/file-uploader/file-uploader.component';
 import {ReadFileService} from '../services/readFile.service';
+import { MissingDialog } from '../components/dialog/missingDialog.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-infer-module',
@@ -8,6 +10,7 @@ import {ReadFileService} from '../services/readFile.service';
   styleUrls: ['./infer-module.component.css']
 })
 export class InferModuleComponent implements OnInit {
+  isLinear = true;
   selectedNetwork = '';
   diamond = false;
   mcode= false;
@@ -15,8 +18,11 @@ export class InferModuleComponent implements OnInit {
   barrenas= false;
   comboChoice= false;
   countSelected= 0;
-  geneFile: any;
-  networkFile: any;
+  geneFile: any = '';
+  networkFile: any = '';
+
+  animal: string;
+  name: string;
 
   networks = [
     {value: 'upload', viewValue: 'Upload a New Network'},
@@ -24,7 +30,7 @@ export class InferModuleComponent implements OnInit {
     {value: 'other', viewValue: 'Other PPI'}
   ];
 
-  constructor(private readFileService: ReadFileService) {
+  constructor(private readFileService: ReadFileService, public dialog: MatDialog) {
     readFileService.file$.subscribe(
       file => {
         if (file.fileType === 'genes') {
@@ -32,7 +38,7 @@ export class InferModuleComponent implements OnInit {
         }else if (file.fileType === 'network') {
           this.networkFile = file.file;
         }
-        console.log(this.geneFile, this.networkFile);
+        // console.log(this.geneFile, this.networkFile);
       });
    }
 
@@ -96,5 +102,20 @@ export class InferModuleComponent implements OnInit {
        this.comboChoice = false;
      }
   }
+  clickNext(stepper: any): void {
+    if (this.geneFile === '') {
+      const dialogRef = this.dialog.open(MissingDialog, {
+        width: '250px',
+        data: { name: this.name, animal: this.animal }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        // console.log('The dialog was closed');
+        this.animal = result;
+      });
+    }else {
+      stepper.next();
+    }
+  }
+
 
 }

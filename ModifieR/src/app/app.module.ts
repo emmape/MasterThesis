@@ -4,7 +4,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule, MatInputModule, MatSelectModule,
   MatButtonModule, MatRadioModule, MatListModule,
   MatIconModule, MatCardModule, MatDividerModule, MatSlideToggleModule,
-  MatSidenavModule, MatCheckboxModule, MatToolbarModule} from '@angular/material';
+  MatSidenavModule, MatCheckboxModule, MatToolbarModule, MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
   import {MatStepperModule} from '@angular/material/stepper';
 
   import { RouterModule } from '@angular/router';
@@ -13,6 +14,7 @@ import { InferModuleComponent } from './infer-module/infer-module.component';
 import { InformationComponent } from './information/information.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ReadFileService } from './services/readFile.service';
+import { MissingDialog } from './components/dialog/missingDialog.component';
 // import { FilePickerModule } from 'angular-file-picker';
 
 
@@ -21,7 +23,11 @@ import { ReadFileService } from './services/readFile.service';
     AppComponent,
     InferModuleComponent,
     InformationComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    MissingDialog
+  ],
+  entryComponents: [
+    MissingDialog
   ],
   imports: [
     RouterModule.forRoot([
@@ -32,6 +38,7 @@ import { ReadFileService } from './services/readFile.service';
 
   ]),
     BrowserModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatSelectModule,
@@ -48,7 +55,7 @@ import { ReadFileService } from './services/readFile.service';
     MatDividerModule,
     MatListModule
   ],
-  providers: [ReadFileService],
+  providers: [ReadFileService, {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

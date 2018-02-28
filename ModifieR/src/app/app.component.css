@@ -8,6 +8,10 @@
   .title{
     font-size: 30px;
   }
+  .title:hover{
+    font-size: 30px;
+    cursor: pointer;
+  }
 
   .main-toolbar{
     /* background-color: #209F80; */
@@ -18,27 +22,39 @@
       font-size: 40px;
       padding-right: 20px;
       margin-bottom: 20px;
-
   }
+  .toolbar-icon:hover{
+    font-size: 40px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
   .content-card{
     /* width: 800px; */
-    width: 70vw;
+    width: 80vw;
     /* height: 78vh; */
-    height: 78vh;
+    height: 81vh;
     margin-left: auto;
     margin-right: auto;
     /* margin-top: 10px; */
     overflow-y: scroll;
+    padding-top: 5px;
+    /* justify-content: center;
+    display: flex; */
   }
  
   .background{
-    background-image: url("../gray.jpg");
-    height: 86.46vh;
+    /* background-image: url("../gray.jpg"); */
+    background-image: url("../triangulation6.png");
+    height: 86.49vh;
     width: 99vw;
         /* background-color: rgba(190, 255, 226, 0.17); */
       /* background-blend-mode: lighten; */
 
   }
+ 
+  
 
  
  

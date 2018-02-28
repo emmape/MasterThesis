@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [linear]="isLinear">
+<mat-horizontal-stepper #stepper="matHorizontalStepper" [linear]="isLinear">
     <mat-step [stepControl]="firstFormGroup">
         <ng-template matStepLabel>Upload Data</ng-template>
         <mat-card class="selector-content-card">
@@ -31,13 +31,14 @@
             <br>
             <mat-divider class="stepper-divider"></mat-divider>
 
-            <button class="next-button" mat-button matStepperNext>Next</button>
+            <!-- <button class="next-button" mat-button matStepperNext (click)="clickNext()">Next</button> -->
+            <button class="next-button" mat-button (click)="clickNext(stepper)">Next</button>
         </mat-card>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
         <ng-template matStepLabel>Choose Algorithms</ng-template>
         <mat-card class="selector-content-card">
-            <mat-card-title>Choose algorithms to use for module inference</mat-card-title>
+            <mat-card-title>Choose algorithms for module inference</mat-card-title>
             <div class="checkbox-div-top">
                 <mat-checkbox [(checked)]="diamond" class="checkbox" (change)="diamondChbChanged()">DIAMOnD</mat-checkbox>
                 <mat-checkbox [(checked)]="mcode" class="checkbox-right" (change)="mcodeChbChanged()">MCODE</mat-checkbox>
