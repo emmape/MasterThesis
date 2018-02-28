@@ -20,5 +20,22 @@
     font-size: 14px;
 }
 .selector-content-card{
-    height: 300px;
+    height: 400px;
+    /* padding-top: 20px; */
+}
+.next-button{
+    margin-top: 20px;
+}
+.instruction{
+    margin-top: 20px;
+}
+.stepper-divider{
+    margin-top: 15px;
+}
+.combine-slide{
+    margin-top: 20px;
+}
+.network-selector{
+    margin-top: 20px;
+    width: 250px;
 }
