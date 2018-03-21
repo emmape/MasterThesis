@@ -4,9 +4,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule, MatInputModule, MatSelectModule,
   MatButtonModule, MatRadioModule, MatListModule,
   MatIconModule, MatCardModule, MatDividerModule, MatSlideToggleModule,
-  MatSidenavModule, MatCheckboxModule, MatToolbarModule, MatDialogModule,
+  MatSidenavModule, MatCheckboxModule, MatToolbarModule, MatDialogModule, MatTooltipModule,
   MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
   import {MatStepperModule} from '@angular/material/stepper';
+  import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
   import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -53,7 +54,10 @@ import { MissingDialog } from './components/dialog/missingDialog.component';
     MatStepperModule,
     MatCardModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ReadFileService, {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]

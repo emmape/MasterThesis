@@ -36,7 +36,12 @@
 .combine-slide{
     margin-top: 20px;
 }
+
 .network-selector{
     margin-top: 20px;
     width: 250px;
+}
+.errorText{
+    margin-top: 20px;
+    font-size: 12px;
 }

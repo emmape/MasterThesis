@@ -3,6 +3,8 @@ import { FileUploaderComponent } from '../components/file-uploader/file-uploader
 import {ReadFileService} from '../services/readFile.service';
 import { MissingDialog } from '../components/dialog/missingDialog.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-infer-module',
@@ -17,12 +19,14 @@ export class InferModuleComponent implements OnInit {
   md= false;
   barrenas= false;
   comboChoice= false;
-  countSelected= 0;
+  countSelected= null;
   geneFile: any = '';
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
   networkFile: any = '';
-
-  animal: string;
-  name: string;
+  // geneFileCtrl = new FormControl('');
+  networkCtrl = new FormControl('', [Validators.required]);
+  algorithmCtrl = new FormControl('');
 
   networks = [
     {value: 'upload', viewValue: 'Upload a New Network'},
@@ -30,7 +34,7 @@ export class InferModuleComponent implements OnInit {
     {value: 'other', viewValue: 'Other PPI'}
   ];
 
-  constructor(private readFileService: ReadFileService, public dialog: MatDialog) {
+  constructor(private readFileService: ReadFileService, public dialog: MatDialog, private _formBuilder: FormBuilder) {
     readFileService.file$.subscribe(
       file => {
         if (file.fileType === 'genes') {
@@ -38,13 +42,21 @@ export class InferModuleComponent implements OnInit {
         }else if (file.fileType === 'network') {
           this.networkFile = file.file;
         }
-        // console.log(this.geneFile, this.networkFile);
       });
+      this.setSecondFormGroupValid();
    }
 
   ngOnInit() {
-
+    this.firstFormGroup = this._formBuilder.group({
+      // geneFileCtrl: this.geneFileCtrl,
+      networkCtrl: this.networkCtrl,
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      algorithmCtrl: this.algorithmCtrl,
+      // diamondCB: this.diamondCB,
+    });
   }
+
 
   diamondChbChanged() {
     if (this.diamond === false) {
@@ -59,6 +71,7 @@ export class InferModuleComponent implements OnInit {
      }else {
        this.comboChoice = false;
      }
+     this.setSecondFormGroupValid();
   }
   mcodeChbChanged() {
     if (this.mcode === false) {
@@ -73,6 +86,7 @@ export class InferModuleComponent implements OnInit {
      }else {
        this.comboChoice = false;
      }
+     this.setSecondFormGroupValid();
   }
   mdChbChanged() {
     if (this.md === false) {
@@ -87,6 +101,7 @@ export class InferModuleComponent implements OnInit {
      }else {
        this.comboChoice = false;
      }
+     this.setSecondFormGroupValid();
   }
   barrenasChbChanged() {
     if (this.barrenas === false) {
@@ -101,21 +116,33 @@ export class InferModuleComponent implements OnInit {
      }else {
        this.comboChoice = false;
      }
+     this.setSecondFormGroupValid();
   }
-  clickNext(stepper: any): void {
-    if (this.geneFile === '') {
+  clickNextFirst(stepper: any): void {
+    if (this.geneFile === '' || (this.networkFile === '' && this.selectedNetwork === 'upload') ) {
       const dialogRef = this.dialog.open(MissingDialog, {
-        width: '250px',
-        data: { name: this.name, animal: this.animal }
+        width: '380px',
+        data: 'You need to upload the required files before moving to the next step.'
       });
       dialogRef.afterClosed().subscribe(result => {
-        // console.log('The dialog was closed');
-        this.animal = result;
       });
     }else {
       stepper.next();
     }
   }
+  clickNextSecond(stepper: any): void {
+   this.setSecondFormGroupValid();
+    console.log('Second form group is:' + this.secondFormGroup.valid + ' Count: ' + this.countSelected);
 
-
+    if (this.secondFormGroup.valid) {
+      stepper.next();
+    }
+  }
+  setSecondFormGroupValid() {
+    if (this.countSelected > 0 && this.countSelected !== null) {
+      this.algorithmCtrl.setErrors(null);
+    }else {
+      this.algorithmCtrl.setErrors({'incorrect': true});
+    }
+  }
 }
